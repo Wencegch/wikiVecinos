@@ -173,7 +173,6 @@ public class Rest extends AppCompatActivity {
                     /** Una vez tenemos los datos en nuestra colección debemos avisar al adaptador que la información ha cambiado.*/
                     recAdapter.notifyDataSetChanged();
                     Log.d("D","Array: " + recAdapter.toString());
-
                 }else{
                     Toast.makeText(Rest.this, "Problema al cargar los datos", Toast.LENGTH_SHORT).show();
                 }
@@ -209,7 +208,6 @@ public class Rest extends AppCompatActivity {
                 Toast.makeText(Rest.this,"Has pulsado no", Toast.LENGTH_SHORT).show();
             }
         });
-
         //Una vez añadidas las configuraciones creamos el alertDialog, y devolvemos el objeto creado
         return builder.create();
     }

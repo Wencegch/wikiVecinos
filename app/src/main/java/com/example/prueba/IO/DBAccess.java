@@ -35,7 +35,6 @@ public class DBAccess extends SQLiteOpenHelper {
      **/
     public DBAccess(Context context) {
         super(context, DB_NAME, null, DB_VERSION);
-
         mContext = context;
     }
 
@@ -55,7 +54,7 @@ public class DBAccess extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int oldVersion, int newVersion) {
         Log("onUpadre");
-        Log("oldversion -> "+oldVersion);
+        Log("oldversion -> " + oldVersion);
 
         switch(oldVersion){
             case 1:
@@ -155,8 +154,8 @@ public class DBAccess extends SQLiteOpenHelper {
             cursor = db.query(DB_TABLE_USER, cols, "User = ? AND Password = ?", new String[]{usuarioInicio, password}, null, null, null);
             if(cursor != null && cursor .moveToFirst()) {
                 nombreUsuario = cursor.getString(0);
-
                 usuarioExiste = true;
+
                 cursor.close();
             }
         } catch (Exception e) {

@@ -1,4 +1,3 @@
-
 package com.example.prueba.model;
 
 import androidx.recyclerview.widget.RecyclerView.ViewHolder;

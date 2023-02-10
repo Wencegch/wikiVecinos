@@ -57,11 +57,13 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
+
     /*comprueba si el usuario y la contraseña introducidos existen en la base de datos y, en caso
     afirmativo, permite al usuario acceder a la siguiente actividad de la aplicación.*/
     public void login(){
         String user = nombreUsuario.getText().toString().trim();
         String pass = password.getText().toString().trim();
+
         //Mira si el campo del usuario está vacio
         if (user.equals("")){
             Toast.makeText(MainActivity.this,"Debes introducir un usuario", Toast.LENGTH_LONG).show();
@@ -91,6 +93,7 @@ public class MainActivity extends AppCompatActivity {
     public void saveUserPreferences(){
         boolean activado;
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
+
         if (saveUser.isChecked()){
             activado = true;
 
@@ -112,7 +115,6 @@ public class MainActivity extends AppCompatActivity {
 
     //carga la información al iniciar la aplicación
     public void loadPreferences(){
-
         //recuperamos las preferencias guardadas en la memoria interna del dispositivo
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
         boolean save = sharedPreferences.getBoolean("SAVE_USER", false);

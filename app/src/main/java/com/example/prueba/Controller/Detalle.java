@@ -23,11 +23,11 @@ public class Detalle extends AppCompatActivity {
     private TextView  especieDetalle;
     private TextView  muletillaDetalle;
     private TextView  ropaDetalle;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.detalle);
-
 
         imgDetalle = (ImageView)findViewById(R.id.imagen_del_detalle);
         nombreDetalle = (TextView)findViewById(R.id.txtNombreDetalle);
@@ -62,7 +62,7 @@ public class Detalle extends AppCompatActivity {
         Glide.with(Detalle.this)
                 .load(i.getExtras().getString("imagen"))
                 .placeholder(progressDrawable)
-                .error(R.mipmap.ic_launcher)
+                .error(R.drawable.imagennoencontrada)
                 .into(imgDetalle);
 
     }
