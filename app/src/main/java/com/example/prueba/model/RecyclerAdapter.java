@@ -22,9 +22,6 @@ import java.util.List;
 /** Se crea la clase herendando de Adapter que admite un tipo viewHolder necesario para contener los elementos de la vista */
 
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.RecyclerHolder> {
-
-    public static int itemSeleccionado;
-
     private List<Personaje> listPersonajes;
     private View.OnLongClickListener longListener;
     private View.OnClickListener smallListener;
