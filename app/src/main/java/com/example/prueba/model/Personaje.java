@@ -12,10 +12,6 @@ public class Personaje {
     private String muletilla;
     private String ropa;
 
-    public  Personaje(){
-
-    }
-
     public Personaje(String imagenURL, String nombre, String genero, String frase, String signo, String cumple, String personalidad, String especie, String muletilla, String ropa) {
         this.imagenURL = imagenURL;
         this.nombre = nombre;

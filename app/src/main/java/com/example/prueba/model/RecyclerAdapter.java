@@ -31,15 +31,6 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Recycl
         this.listPersonajes = listPersonajes;
     }
 
-    //Setter de los listeners
-    public void setOnLongListener(View.OnLongClickListener longListener) {
-        this.longListener = longListener;
-    }
-
-    public void setOnSmallListener(View.OnClickListener smallListener) {
-        this.smallListener = smallListener;
-    }
-
     //Esto llena cada celda del recyclerView con nuestro diseño
     @NonNull
     @Override
@@ -118,5 +109,14 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Recycl
 
     public Personaje getPersonaje(int pos){
         return this.listPersonajes.get(pos);
+    }
+
+    //Setter de los listeners
+    public void setOnLongListener(View.OnLongClickListener longListener) {
+        this.longListener = longListener;
+    }
+
+    public void setOnSmallListener(View.OnClickListener smallListener) {
+        this.smallListener = smallListener;
     }
 }

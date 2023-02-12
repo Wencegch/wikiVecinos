@@ -34,7 +34,7 @@ public class Rest extends AppCompatActivity {
     private RecyclerView recyclerView;
     private RecyclerAdapter recAdapter;
     private EspaciadorRecV espacioRv = new EspaciadorRecV(10);
-    int posicionPulsada;
+    private int posicionPulsada;
     private ActionMode mActionMode;
 
     @Override
