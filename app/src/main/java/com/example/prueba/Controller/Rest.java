@@ -42,13 +42,14 @@ public class Rest extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.maestro);
 
-        /**Se inicializan los objetos recyclerView y recyclerAdapter, pasandole a este último la lista*/
+        /*Se crean las instancias de recyclerView y recyclerAdapter, y se le pasa a este último la lista como parámetro de inicialización.*/
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         recAdapter = new RecyclerAdapter(vecinos);
 
-        /**La clase layaoutManager se encarga de gestionar la disposición de los elementos de la lista dentro del recyclerView.
-         * Existen diferentes opciones, como gridLayoutManager que los coloca en vista de rejilla.
-         * Para este caso se ha usado Linear, para una disposición básica (un elemento debajo de otro).*/
+        /*La clase LayoutManager tiene la responsabilidad de manejar la disposición de los elementos
+        * en una lista dentro de un RecyclerView. Hay varias opciones disponibles, como GridLayoutManager
+        * que los coloca en una vista de rejilla. En este caso se ha utilizado el modo Linear para una
+        * disposición básica, con un elemento debajo de otro.*/
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
 
         recAdapter.setOnSmallListener(new View.OnClickListener() {
@@ -83,8 +84,8 @@ public class Rest extends AppCompatActivity {
             }
         });
 
-        /**Por último solo debemos añadir los elementos creados anteriormente a la vista padre (RecyclerView)
-         * con sus respectivos métodos.*/
+        /*Finalmente, solo necesitamos agregar los elementos creados previamente a la vista principal (RecyclerView)
+        * utilizando sus respectivos métodos.*/
         recyclerView.setAdapter(recAdapter);
         recyclerView.setLayoutManager(layoutManager);
 
@@ -93,6 +94,8 @@ public class Rest extends AppCompatActivity {
     }
 
     private ActionMode.Callback mActionCallback = new ActionMode.Callback() {
+        /* Se llama cuando se crea un nuevo modo de acción contextual. En este método, se infla el menú
+        de acciones action_menu en el modo de acción contextual y se establece su título como "WikiVecinos".*/
         @Override
         public boolean onCreateActionMode(ActionMode actionMode, Menu menu) {
             MenuInflater inflater = actionMode.getMenuInflater();
@@ -101,11 +104,16 @@ public class Rest extends AppCompatActivity {
             return  true;
         }
 
+        /*Se llama cada vez que el modo de acción contextual necesita ser actualizado, pero en este caso, simplemente se devuelve false.*/
         @Override
         public boolean onPrepareActionMode(ActionMode actionMode, Menu menu) {
             return false;
         }
 
+        /*Se llama cuando se hace clic en un elemento del menú de acciones en el modo de acción contextual.
+        * En este método, se comprueba si el elemento del menú clicado es el elemento con ID act_bin y,
+        * en caso afirmativo, se crea y muestra un diálogo de alerta para confirmar la eliminación de un
+        * personaje específico. Además, el modo de acción contextual se finaliza al final de este método.*/
         @Override
         public boolean onActionItemClicked(ActionMode actionMode, MenuItem menuItem) {
             int itemId = menuItem.getItemId();
@@ -120,14 +128,14 @@ public class Rest extends AppCompatActivity {
             return true;
         }
 
+        /*Se llama cuando el modo de acción contextual es destruido, y en este caso, se establece la variable mActionMode a null.*/
         @Override
         public void onDestroyActionMode(ActionMode actionMode) {
             mActionMode = null;
         }
     };
 
-    /**Al ser una tarea que implica una espera, como es la respuesta del servidor, se tiene que llevar
-     * a cabo a través de un hilo secundario.*/
+    //Dado que implica una espera por la respuesta del servidor, esta tarea debe ejecutarse en un hilo secundario.
     private class taskConnections extends AsyncTask<String, Void, String>{
 
         @Override
@@ -148,9 +156,10 @@ public class Rest extends AppCompatActivity {
                 if(s != null){
                     Log.d("D","DATOS: " + s);
 
-                    /** La respuesta que nos devuelve es un texto en formato JSON. Para ello, en este caso,
-                     * haremos uso de las clases que nos proporciona Android. Antes que nada, se deberá consultar
-                     * la documentación para conocer el formato de la respuesta del servidor, y así saber cómo deserializar el mensaje.*/
+                    /*En este caso, la respuesta que recibimos del servidor es un texto en formato JSON.
+                    * Para manejar este tipo de formato, utilizaremos las clases proporcionadas por Android.
+                    * Es importante consultar la documentación para entender el formato de la respuesta del
+                    * servidor y poder deserializar el mensaje correctamente.*/
                     JSONArray jsonArray = new JSONArray(s);
 
                     for(int i = 0; i < jsonArray.length(); i++){
@@ -166,11 +175,12 @@ public class Rest extends AppCompatActivity {
                         String muletilla = jsonArray.getJSONObject(i).getString("quote");
                         String ropa = jsonArray.getJSONObject(i).getString("clothing");
 
-                        //String cumple = cumpleDia + " " + cumpleMes;
-                        vecinos.add(new Personaje(img, name, genero, "'" + frase + "'", signo, cumpleDia + " " + cumpleMes, personalidad, especie, "'" + muletilla +"'", ropa));
+                        String cumple = cumpleDia + " " + cumpleMes;
+                        vecinos.add(new Personaje(img, name, genero, "'" + frase + "'", signo, cumple, personalidad, especie, "'" + muletilla +"'", ropa));
                     }
 
-                    /** Una vez tenemos los datos en nuestra colección debemos avisar al adaptador que la información ha cambiado.*/
+                    /*Después de obtener los datos y almacenarlos en nuestra colección, es necesario
+                    * notificar al adaptador que la información ha sido actualizada.*/
                     recAdapter.notifyDataSetChanged();
                     Log.d("D","Array: " + recAdapter.toString());
                 }else{

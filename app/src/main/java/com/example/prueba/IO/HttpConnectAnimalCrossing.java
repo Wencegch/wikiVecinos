@@ -5,31 +5,31 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-/**Clase que gestiona la conexión con la base de datos externa, a través de una url base a la que debemos
- *  concatenarle los "endpoint" o final de url para recibir la información que necesitemos. Así mismo los parametros
- *  que se quieran enviar se forman en la URL a través del caracter '?'*/
+/*Esta clase es responsable de gestionar la conexión con una base de datos externa a través de una
+* URL base. Para recibir la información que necesitamos, concatenamos los "endpoint" o la parte final
+* de la URL. Además, si deseamos enviar parámetros, se forman en la URL utilizando el carácter '?'.*/
 public class HttpConnectAnimalCrossing {
 
     //Declaramos la url base, que no cambia.
     private static final String URL_BASE = "https://api.nookipedia.com";
 
-    /**
-     * Definimos el método para peticiones GET el cual se usará para la consulta de información
-     */
+    /*Este método que hemos definido se utiliza para realizar peticiones GET y consultar información
+    * de la base de datos externa.*/
     public static String getRequest(String endpoint) {
         HttpURLConnection http = null;
         String content = null;
         try {
-            /**Se forma la url más el endpoint. Así como la cabecera, que permitirá decidir la codificación
-             * de los datos que se están trasmitiendo.*/
+            /*Para enviar la petición, formamos la URL concatenando el endpoint correspondiente.
+            Además, se establece una cabecera que permitirá especificar la codificación de los datos
+            que se están transmitiendo.*/
             URL url = new URL( URL_BASE + endpoint );
             http = (HttpURLConnection)url.openConnection();
             http.setRequestProperty("Content-Type", "application/json");
             http.setRequestProperty("Accept", "application/json");
             http.setRequestProperty("X-API-KEY", "316e153d-8651-47c7-9795-eb3f20d830ee");
 
-            /** Si el servidor devuelve un codigo 200 (HTTP_OK == 200) quiere decir que ha devuelto
-             * correctamente la información solicitada.*/
+            /*Si el servidor devuelve un código 200 (HTTP_OK == 200), significa que ha respondido
+            * correctamente a la solicitud y ha proporcionado la información solicitada.*/
             if(http.getResponseCode() == HttpURLConnection.HTTP_OK) {
                 //Se codifica el texto de la respuesta como String.
                 StringBuilder sb = new StringBuilder();

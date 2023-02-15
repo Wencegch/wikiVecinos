@@ -27,12 +27,9 @@ public class DBAccess extends SQLiteOpenHelper {
     //Application Context
     private Context mContext;
 
-    /**
-     * Constructor de la base de datos, si no existe la base de datos la crea, sino se conecta.
-     *  En el caso de que se hiciese una actualización y se cambiase la versión,
-     *  el constructor llamaría al método onUpgrade para actualizar los cambios de la base de datos.
-
-     **/
+    /*Este es el constructor de la base de datos. Si la base de datos no existe, se crea. Si ya existe,
+    * se conecta a ella. En caso de que se realice una actualización y se cambie la versión de la base de datos,
+    * el constructor invocará el método onUpgrade para actualizar los cambios en la estructura de la base de datos.*/
     public DBAccess(Context context) {
         super(context, DB_NAME, null, DB_VERSION);
         mContext = context;
@@ -74,10 +71,9 @@ public class DBAccess extends SQLiteOpenHelper {
         values.put(USER_COLUMN, user);
         values.put(PASSWORD_COLUMN, password);
 
-        /**Insertamos a través del método insert, cuyos parametro son:
-            nombre de la tabla
-            nullColumnHack permite indicar si hay una columna cuyo valor pueda ser nulo.
-            valores asociados a la inserción.*/
+        /*Realizamos la inserción de datos utilizando el método insert, que requiere los siguientes
+        * parámetros: el nombre de la tabla, el nullColumnHack que permite indicar si alguna columna
+        * puede tener un valor nulo y los valores asociados a la inserción.*/
 
         result = db.insert(DB_TABLE_USER, null, values);
 
@@ -94,8 +90,8 @@ public class DBAccess extends SQLiteOpenHelper {
         //Pedimos acceso de lectura de la BD.
         SQLiteDatabase db = this.getReadableDatabase();
 
-        /**Realizamos la consulta a través del método 'query'.
-         Este método devuelve un cursor que nos permite recorrer las tuplas del resultado.   */
+        /*Para realizar una consulta a la base de datos, utilizamos el método 'query'. Este método
+        * nos devuelve un cursor que nos permite recorrer las tuplas del resultado obtenido.*/
 
         String [] cols = new String []{USER_COLUMN};
 
