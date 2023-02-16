@@ -92,16 +92,19 @@ public class MainActivity extends AppCompatActivity {
     //guarda la información del usuario en la memoria interna del dispositivo
     public void saveUserPreferences(){
         boolean activado;
+        //se crea un objeto SharedPreferences que se utiliza para almacenar las preferencias
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
 
         if (saveUser.isChecked()){
             activado = true;
-
+            //se almacena el nombre de usuario (obtenido del objeto nombreUsuario)
             sharedPreferences.edit().putString ("USUARIO",nombreUsuario.getText().toString()).commit();
             SharedPreferences.Editor editor = sharedPreferences.edit();
 
             editor.putBoolean("SAVE_USER", activado);
             editor.apply();
+        /*Si activado es false, se elimina la clave "USUARIO" y se guarda el valor booleano false con la clave "SAVE_USER"
+        * y se llama al método apply() del objeto SharedPreferences.Editor para guardar los cambios.*/
         } else {
             activado = false;
 
@@ -113,13 +116,16 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    //carga la información al iniciar la aplicación
+    //carga las preferencias de usuario.
     public void loadPreferences(){
-        //recuperamos las preferencias guardadas en la memoria interna del dispositivo
+        //se obtiene el objeto SharedPreferences que se utilizó para almacenar las preferencias en el método saveUserPreferences()
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
+        //se obtiene el valor booleano save asociado con la clave "SAVE_USER" utilizando el método getBoolean()
         boolean save = sharedPreferences.getBoolean("SAVE_USER", false);
 
-        // si la opción de guardar usuario está seleccionada
+        /*Si save es true, se obtiene el nombre de usuario asociado con la clave "USUARIO" utilizando
+        * el método getString() y se establece el texto del objeto nombreUsuario con este valor. Además,
+        * el botón saveUser se establece en true para indicar que se ha guardado el nombre de usuario.*/
         if (save) {
             String user = sharedPreferences.getString("USUARIO", "");
             nombreUsuario.setText(user);
