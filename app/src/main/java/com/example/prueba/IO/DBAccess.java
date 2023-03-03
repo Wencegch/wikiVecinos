@@ -38,7 +38,10 @@ public class DBAccess extends SQLiteOpenHelper {
         mContext = context;
     }
 
-    //Sobrecargamos onCreate, encargado de crear las tablas asociadas a la base de datos.
+    /**
+     * Sobrecargamos onCreate, encargado de crear las tablas asociadas a la base de datos.
+     * @param sqLiteDatabase ejecutar consultas y operaciones en la base de datos SQLite
+     */
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         //Version 1
@@ -67,7 +70,7 @@ public class DBAccess extends SQLiteOpenHelper {
      * Creamos un método para insertar un dato en la BD, si el usuario no existe se guarda junto a la contraseña.
      * @param user comprueba si el usuario existe
      * @param password guarda la contraseña
-     * @return de
+     * @return devuelve un valor que determina si la operación de inserción ha sido exitosa o no.
      */
     public long insert(String user, String password){
         //Pedimos acceso de escritura en la base de datos.
