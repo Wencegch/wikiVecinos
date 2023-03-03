@@ -12,6 +12,19 @@ public class Personaje {
     private String muletilla;
     private String ropa;
 
+    /**
+     * Constructor con imagen, nombre, género, frase, signo, cumple, personalidad, especie, muletilla y ropa
+     * @param imagenURL url de la imagen
+     * @param nombre nombre del personaje
+     * @param genero género del personaje
+     * @param frase frase del personaje
+     * @param signo signo zodiaco del personaje
+     * @param cumple cumpleaños del personaje
+     * @param personalidad personalidad del personaje
+     * @param especie especie(perro, gato..) del personaje
+     * @param muletilla muletilla que utiliza el personaje
+     * @param ropa ropa que utiliza el personaje
+     */
     public Personaje(String imagenURL, String nombre, String genero, String frase, String signo, String cumple, String personalidad, String especie, String muletilla, String ropa) {
         this.imagenURL = imagenURL;
         this.nombre = nombre;

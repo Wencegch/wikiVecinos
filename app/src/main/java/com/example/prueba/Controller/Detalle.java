@@ -24,6 +24,11 @@ public class Detalle extends AppCompatActivity {
     private TextView  muletillaDetalle;
     private TextView  ropaDetalle;
 
+    /**
+     * Método se llama cuando se crea una nueva instancia de la actividad y se utiliza para realizar tareas
+     * @param savedInstanceState almacena y restaura el estado de la actividad en caso de que sea destruida
+     *                           y recreada por el sistema operativo.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

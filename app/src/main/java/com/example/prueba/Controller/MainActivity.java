@@ -23,6 +23,11 @@ public class MainActivity extends AppCompatActivity {
     private CircularProgressButton circularIniciarSesion;
     private CircularProgressButton circularRegistrarse;
 
+    /**
+     * Método se llama cuando se crea una nueva instancia de la actividad y se utiliza para realizar tareas
+     * @param savedInstanceState almacena y restaura el estado de la actividad en caso de que sea destruida
+     *                           y recreada por el sistema operativo.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,8 +63,10 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    /*comprueba si el usuario y la contraseña introducidos existen en la base de datos y, en caso
-    afirmativo, permite al usuario acceder a la siguiente actividad de la aplicación.*/
+    /**
+     * Comprueba si el usuario y la contraseña introducidos existen en la base de datos y, en caso
+     * afirmativo, permite al usuario acceder a la siguiente actividad de la aplicación.
+     */
     public void login(){
         String user = nombreUsuario.getText().toString().trim();
         String pass = password.getText().toString().trim();
@@ -89,7 +96,9 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    //guarda la información del usuario en la memoria interna del dispositivo
+    /**
+     * Guarda la información del usuario en la memoria interna del dispositivo
+     */
     public void saveUserPreferences(){
         boolean activado;
         //se crea un objeto SharedPreferences que se utiliza para almacenar las preferencias
@@ -116,7 +125,9 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    //carga las preferencias de usuario.
+    /**
+     * Carga las preferencias de usuario.
+     */
     public void loadPreferences(){
         //se obtiene el objeto SharedPreferences que se utilizó para almacenar las preferencias en el método saveUserPreferences()
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(MainActivity.this);

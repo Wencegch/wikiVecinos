@@ -13,8 +13,12 @@ public class HttpConnectAnimalCrossing {
     //Declaramos la url base, que no cambia.
     private static final String URL_BASE = "https://api.nookipedia.com";
 
-    /*Este método que hemos definido se utiliza para realizar peticiones GET y consultar información
-    * de la base de datos externa.*/
+    /**
+     * Este método que hemos definido se utiliza para realizar peticiones GET y consultar información
+     * de la base de datos externa
+     * @param endpoint parte final de la URL
+     * @return devuelve la url completa de la página
+     */
     public static String getRequest(String endpoint) {
         HttpURLConnection http = null;
         String content = null;

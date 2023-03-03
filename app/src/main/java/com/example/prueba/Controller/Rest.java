@@ -37,6 +37,11 @@ public class Rest extends AppCompatActivity {
     private int posicionPulsada;
     private ActionMode mActionMode;
 
+    /**
+     * Método se llama cuando se crea una nueva instancia de la actividad y se utiliza para realizar tareas
+     * @param savedInstanceState almacena y restaura el estado de la actividad en caso de que sea destruida
+     *                           y recreada por el sistema operativo.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -93,9 +98,17 @@ public class Rest extends AppCompatActivity {
         new taskConnections().execute("GET","/villagers");
     }
 
+    /**
+     * Método que define un conjunto de devoluciones de llamada para el modo de acción contextual.
+     */
     private ActionMode.Callback mActionCallback = new ActionMode.Callback() {
-        /* Se llama cuando se crea un nuevo modo de acción contextual. En este método, se infla el menú
-        de acciones action_menu en el modo de acción contextual y se establece su título como "WikiVecinos".*/
+        /**
+         * Se llama cuando se crea un nuevo modo de acción contextual. En este método, se infla el menú
+         * de acciones action_menu en el modo de acción contextual y se establece su título como "WikiVecinos"
+         * @param actionMode representa el modo de acción contextual que se está creando
+         * @param menu representa el menú de acciones que se mostrará en el modo de acción contextual.
+         * @return
+         */
         @Override
         public boolean onCreateActionMode(ActionMode actionMode, Menu menu) {
             MenuInflater inflater = actionMode.getMenuInflater();
@@ -104,16 +117,20 @@ public class Rest extends AppCompatActivity {
             return  true;
         }
 
-        /*Se llama cada vez que el modo de acción contextual necesita ser actualizado, pero en este caso, simplemente se devuelve false.*/
         @Override
         public boolean onPrepareActionMode(ActionMode actionMode, Menu menu) {
             return false;
         }
 
-        /*Se llama cuando se hace clic en un elemento del menú de acciones en el modo de acción contextual.
-        * En este método, se comprueba si el elemento del menú clicado es el elemento con ID act_bin y,
-        * en caso afirmativo, se crea y muestra un diálogo de alerta para confirmar la eliminación de un
-        * personaje específico. Además, el modo de acción contextual se finaliza al final de este método.*/
+        /**
+         * Se llama cuando se hace clic en un elemento del menú de acciones en el modo de acción contextual.
+         * En este método, se comprueba si el elemento del menú clicado es el elemento con ID act_bin y,
+         * en caso afirmativo, se crea y muestra un diálogo de alerta para confirmar la eliminación de un
+         * personaje específico. Además, el modo de acción contextual se finaliza al final de este método.
+         * @param actionMode modo de acción contextual
+         * @param menuItem representa un elemento de menú en un menú contextual
+         * @return
+         */
         @Override
         public boolean onActionItemClicked(ActionMode actionMode, MenuItem menuItem) {
             int itemId = menuItem.getItemId();
@@ -128,14 +145,19 @@ public class Rest extends AppCompatActivity {
             return true;
         }
 
-        /*Se llama cuando el modo de acción contextual es destruido, y en este caso, se establece la variable mActionMode a null.*/
+        /**
+         * Se llama cuando el modo de acción contextual es destruido, y en este caso, se establece la variable mActionMode a null
+         * @param actionMode
+         */
         @Override
         public void onDestroyActionMode(ActionMode actionMode) {
             mActionMode = null;
         }
     };
 
-    //Dado que implica una espera por la respuesta del servidor, esta tarea debe ejecutarse en un hilo secundario.
+    /**
+     * Dado que implica una espera por la respuesta del servidor, esta tarea debe ejecutarse en un hilo secundario.
+     */
     private class taskConnections extends AsyncTask<String, Void, String>{
 
         @Override
@@ -192,6 +214,12 @@ public class Rest extends AppCompatActivity {
         }
     }
 
+    /**
+     * Crea un AlertDialog
+     * @param titulo título del AlertDialog
+     * @param mensaje mensaje del AlertDialog
+     * @return
+     */
     public AlertDialog createAlertDialog(String titulo, String mensaje){
         //Constructor para ayudar a configurar el cuadro de dialogo
         AlertDialog.Builder builder = new AlertDialog.Builder(Rest.this);

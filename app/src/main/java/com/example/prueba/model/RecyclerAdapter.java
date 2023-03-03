@@ -25,7 +25,10 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Recycl
     private View.OnClickListener smallListener;
     private CircularProgressDrawable progressDrawable;
 
-    //Constructor
+    /**
+     * Constructor
+     * @param listPersonajes lista de donde saca la información
+     */
     public RecyclerAdapter(List<Personaje> listPersonajes) {
         this.listPersonajes = listPersonajes;
     }

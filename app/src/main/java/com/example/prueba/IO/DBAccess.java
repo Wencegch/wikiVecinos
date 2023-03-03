@@ -7,8 +7,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+// Extendemos la clase con SQLiteOpenHelper para tener acceso a los métodos que gestiona la base de datos.
 public class DBAccess extends SQLiteOpenHelper {
-    // Extendemos la clase con SQLiteOpenHelper para tener acceso a los métodos que gestiona la base de datos.
 
     //Database name
     private static final String DB_NAME = "db_AnimalCrossing";
@@ -27,9 +27,12 @@ public class DBAccess extends SQLiteOpenHelper {
     //Application Context
     private Context mContext;
 
-    /*Este es el constructor de la base de datos. Si la base de datos no existe, se crea. Si ya existe,
-    * se conecta a ella. En caso de que se realice una actualización y se cambie la versión de la base de datos,
-    * el constructor invocará el método onUpgrade para actualizar los cambios en la estructura de la base de datos.*/
+    /**
+     * Este es el constructor de la base de datos. Si la base de datos no existe, se crea. Si ya existe,
+     * se conecta a ella. En caso de que se realice una actualización y se cambie la versión de la base de datos,
+     * el constructor invocará el método onUpgrade para actualizar los cambios en la estructura de la base de datos
+     * @param context
+     */
     public DBAccess(Context context) {
         super(context, DB_NAME, null, DB_VERSION);
         mContext = context;
@@ -60,7 +63,12 @@ public class DBAccess extends SQLiteOpenHelper {
         }
     }
 
-    //Creamos un método para insertar un dato en la BD.
+    /**
+     * Creamos un método para insertar un dato en la BD, si el usuario no existe se guarda junto a la contraseña.
+     * @param user comprueba si el usuario existe
+     * @param password guarda la contraseña
+     * @return de
+     */
     public long insert(String user, String password){
         //Pedimos acceso de escritura en la base de datos.
         SQLiteDatabase db = this.getWritableDatabase();
@@ -114,7 +122,11 @@ public class DBAccess extends SQLiteOpenHelper {
         return result;
     }
 
-    //Método para saber si el USUARIO existe
+    /**
+     * Método para saber si el USUARIO existe
+     * @param usuarioBuscado comprueba si el usuario introducido existe
+     * @return true si existe o false si no
+     */
     public boolean compararUsuario(String usuarioBuscado) {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = null;
@@ -138,7 +150,12 @@ public class DBAccess extends SQLiteOpenHelper {
         return usuarioExiste;
     }
 
-    //Método para saber si el USUARIO y la CONTRASEÑA existen
+    /**
+     * Método para saber si el USUARIO y la CONTRASEÑA existen
+     * @param usuarioInicio comprueba si el usuario introducido existe
+     * @param password comprueba si la contraseña introducida existe
+     * @return
+     */
     public boolean inicioSesion(String usuarioInicio, String password){
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = null;
@@ -160,12 +177,6 @@ public class DBAccess extends SQLiteOpenHelper {
             cursor.close();
         }
         return usuarioExiste;
-    }
-
-    public void deleteUsers(){
-        SQLiteDatabase db = this.getWritableDatabase();
-        db.execSQL("DELETE FROM " + DB_TABLE_USER);
-        db.close();
     }
 
     public void Log(String msg){
