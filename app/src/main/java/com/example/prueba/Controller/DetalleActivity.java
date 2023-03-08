@@ -11,7 +11,7 @@ import androidx.swiperefreshlayout.widget.CircularProgressDrawable;
 import com.bumptech.glide.Glide;
 import com.example.prueba.R;
 
-public class Detalle extends AppCompatActivity {
+public class DetalleActivity extends AppCompatActivity {
     private CircularProgressDrawable progressDrawable;
     private ImageView imgDetalle;
     private TextView  nombreDetalle;
@@ -64,7 +64,7 @@ public class Detalle extends AppCompatActivity {
         progressDrawable.setCenterRadius(30f);
         progressDrawable.start();
 
-        Glide.with(Detalle.this)
+        Glide.with(DetalleActivity.this)
                 .load(i.getExtras().getString("imagen"))
                 .placeholder(progressDrawable)
                 .error(R.drawable.imagennoencontrada)

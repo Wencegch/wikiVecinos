@@ -28,7 +28,7 @@ import org.json.JSONException;
 
 import java.util.ArrayList;
 
-public class Rest extends AppCompatActivity {
+public class RestActivity extends AppCompatActivity {
 
     private ArrayList<Personaje> vecinos = new ArrayList<>();
     private RecyclerView recyclerView;
@@ -62,7 +62,7 @@ public class Rest extends AppCompatActivity {
             public void onClick(View view) {
                 posicionPulsada = recyclerView.getChildAdapterPosition(view);
                 Personaje personaje = recAdapter.getPersonaje(posicionPulsada);
-                Intent i = new Intent(view.getContext(), Detalle.class);
+                Intent i = new Intent(view.getContext(), DetalleActivity.class);
                 //Añadimos información adicional al intent en forma de clave-valor, la clave la cadena y el valor el tipo de dato
                 i.putExtra("imagen",personaje.getImagenURL());
                 i.putExtra("nombre",personaje.getNombre());
@@ -206,7 +206,7 @@ public class Rest extends AppCompatActivity {
                     recAdapter.notifyDataSetChanged();
                     Log.d("D","Array: " + recAdapter.toString());
                 }else{
-                    Toast.makeText(Rest.this, "Problema al cargar los datos", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RestActivity.this, "Problema al cargar los datos", Toast.LENGTH_SHORT).show();
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -222,7 +222,7 @@ public class Rest extends AppCompatActivity {
      */
     public AlertDialog createAlertDialog(String titulo, String mensaje){
         //Constructor para ayudar a configurar el cuadro de dialogo
-        AlertDialog.Builder builder = new AlertDialog.Builder(Rest.this);
+        AlertDialog.Builder builder = new AlertDialog.Builder(RestActivity.this);
 
         //Permite añadir todas las configuraciones que se necesiten antes de crear el alertdialog
         builder.setMessage(mensaje).setTitle(titulo);
@@ -235,7 +235,7 @@ public class Rest extends AppCompatActivity {
                 vecinos.remove(personaje);
                 recAdapter.notifyItemRemoved(posicionPulsada);
 
-                Toast.makeText(Rest.this," Has pulsado sí", Toast.LENGTH_SHORT).show();
+                Toast.makeText(RestActivity.this," Has pulsado sí", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -243,7 +243,7 @@ public class Rest extends AppCompatActivity {
         builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                Toast.makeText(Rest.this,"Has pulsado no", Toast.LENGTH_SHORT).show();
+                Toast.makeText(RestActivity.this,"Has pulsado no", Toast.LENGTH_SHORT).show();
             }
         });
         //Una vez añadidas las configuraciones creamos el alertDialog, y devolvemos el objeto creado

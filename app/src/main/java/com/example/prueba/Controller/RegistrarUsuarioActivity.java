@@ -11,7 +11,7 @@ import com.dd.CircularProgressButton;
 import com.example.prueba.IO.DBAccess;
 import com.example.prueba.R;
 
-public class RegistrarUsuario extends AppCompatActivity {
+public class RegistrarUsuarioActivity extends AppCompatActivity {
     private EditText usuario;
     private EditText pass;
     private CircularProgressButton aceptar;
@@ -41,16 +41,16 @@ public class RegistrarUsuario extends AppCompatActivity {
 
                 //comprueba que el campo del usuario y la contraseña no están vacios
                 if (user.equals("") || password.equals("")){
-                    Toast.makeText(RegistrarUsuario.this, "Los campos no pueden estar vacios", Toast.LENGTH_LONG).show();
+                    Toast.makeText(RegistrarUsuarioActivity.this, "Los campos no pueden estar vacios", Toast.LENGTH_LONG).show();
                     aceptar.setProgress(-1);
                 }else{
                     //Mira si el usuario ya ha sido creado en la base de datos, sino, se guardan el usuario y la contraseña
                     if (mDB.compararUsuario(user) == true){
-                        Toast.makeText(RegistrarUsuario.this,"Este nombre de usuario ya ha sido registrado", Toast.LENGTH_LONG).show();
+                        Toast.makeText(RegistrarUsuarioActivity.this,"Este nombre de usuario ya ha sido registrado", Toast.LENGTH_LONG).show();
                         aceptar.setProgress(-1);
                     }else{
                         mDB.insert(user, password);
-                        Toast.makeText(RegistrarUsuario.this,"Usuario creado correctamente", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(RegistrarUsuarioActivity.this,"Usuario creado correctamente", Toast.LENGTH_SHORT).show();
                         aceptar.setProgress(0);
                     }
                 }

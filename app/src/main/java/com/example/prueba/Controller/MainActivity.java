@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
         circularRegistrarse.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(MainActivity.this, RegistrarUsuario.class);
+                Intent i = new Intent(MainActivity.this, RegistrarUsuarioActivity.class);
                 startActivity(i);
             }
         });
@@ -85,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
                 if (mDB.inicioSesion(user, pass) == true){
                     Toast.makeText(MainActivity.this,"Accediendo a los amiibos..", Toast.LENGTH_SHORT).show();
                     circularIniciarSesion.setProgress(0);
-                    Intent i = new Intent(MainActivity.this, Rest.class);
+                    Intent i = new Intent(MainActivity.this, RestActivity.class);
                     startActivity(i);
                 }else {
                     Toast.makeText(MainActivity.this,"Contraseña incorrecta", Toast.LENGTH_LONG).show();
