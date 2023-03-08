@@ -25,7 +25,7 @@ public class RegistrarUsuarioActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.registrar_usuario);
+        setContentView(R.layout.activity_registrar_usuario);
 
         usuario = (EditText) findViewById(R.id.txtUser);
         pass = (EditText) findViewById(R.id.txtPassword);

@@ -45,7 +45,7 @@ public class RestActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.maestro);
+        setContentView(R.layout.activity_maestro);
 
         /*Se crean las instancias de recyclerView y recyclerAdapter, y se le pasa a este último la lista como parámetro de inicialización.*/
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);

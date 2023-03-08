@@ -32,7 +32,7 @@ public class DetalleActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.detalle);
+        setContentView(R.layout.activity_detalle);
 
         imgDetalle = (ImageView)findViewById(R.id.imagen_del_detalle);
         nombreDetalle = (TextView)findViewById(R.id.txtNombreDetalle);
