@@ -12,8 +12,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import android.view.ActionMode;
+
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -22,6 +25,7 @@ import com.example.prueba.R;
 import com.example.prueba.model.EspaciadorRecV;
 import com.example.prueba.model.Personaje;
 import com.example.prueba.model.RecyclerAdapter;
+import com.example.prueba.utils.Preferences;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -29,6 +33,7 @@ import org.json.JSONException;
 import java.util.ArrayList;
 
 public class RestActivity extends AppCompatActivity {
+    private ConstraintLayout constraintLayout;
 
     private ArrayList<Personaje> vecinos = new ArrayList<>();
     private RecyclerView recyclerView;
@@ -46,6 +51,7 @@ public class RestActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maestro);
+        constraintLayout = (ConstraintLayout) findViewById(R.id.constraint_layout_list);
 
         /*Se crean las instancias de recyclerView y recyclerAdapter, y se le pasa a este último la lista como parámetro de inicialización.*/
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
@@ -96,6 +102,38 @@ public class RestActivity extends AppCompatActivity {
 
         recyclerView.addItemDecoration(espacioRv);
         new taskConnections().execute("GET","/villagers");
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        // Cargamos las preferencias
+        Preferences.loadPreferences(this, constraintLayout);
+    }
+
+    // Sobreescribimos el metodo onCreateOptionsMenu para crearnos un menu personalizada
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Usamos un inflater para construir la vista pasandole el menu por defecto como parámetro
+        // para colocarlo en la vista
+        getMenuInflater().inflate(R.menu.simple_menu, menu);
+
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.item_preferencias:
+                Intent i = new Intent(RestActivity.this, SettingActivity.class);
+                startActivity(i);
+                break;
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
     /**

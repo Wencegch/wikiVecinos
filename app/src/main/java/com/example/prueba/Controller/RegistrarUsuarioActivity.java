@@ -1,20 +1,30 @@
 package com.example.prueba.Controller;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.dd.CircularProgressButton;
 import com.example.prueba.IO.DBAccess;
 import com.example.prueba.R;
+import com.example.prueba.utils.Preferences;
 
 public class RegistrarUsuarioActivity extends AppCompatActivity {
+    private ConstraintLayout constraintLayout;
+
     private EditText usuario;
     private EditText pass;
+
     private CircularProgressButton aceptar;
+
     private DBAccess mDB;
 
     /**
@@ -26,6 +36,7 @@ public class RegistrarUsuarioActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registrar_usuario);
+        constraintLayout = (ConstraintLayout) findViewById(R.id.constraint_layout_registrar_usuario);
 
         usuario = (EditText) findViewById(R.id.txtUser);
         pass = (EditText) findViewById(R.id.txtPassword);
@@ -33,6 +44,8 @@ public class RegistrarUsuarioActivity extends AppCompatActivity {
 
         mDB = new DBAccess(this);
 
+        // Cargamos la preferencias
+        Preferences.loadPreferences(this, constraintLayout);
         aceptar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -56,5 +69,40 @@ public class RegistrarUsuarioActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        // Cargamos las preferencias
+        Preferences.loadPreferences(this, constraintLayout);
+    }
+
+    // Sobreescribimos el metodo onCreateOptionsMenu para crearnos un menu personalizada
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Usamos un inflater para construir la vista pasandole el menu por defecto como parámetro
+        // para colocarlo en la vista
+        getMenuInflater().inflate(R.menu.simple_menu, menu);
+
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    // Sobrescribimos el metodo onOptionsItemSelected para manejar las diferentes opciones del menu
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
+            // Si queremos modificar las preferencias
+            case R.id.item_preferencias:
+                Intent preferencias = new Intent(RegistrarUsuarioActivity.this, SettingActivity.class);
+                startActivity(preferencias);
+                break;
+            // Si queremos volver a la actividad anterior
+            case android.R.id.home:
+                onBackPressed();
+                break;
+        }
+
+        return true;
     }
 }

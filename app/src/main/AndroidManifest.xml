@@ -24,6 +24,10 @@
             android:exported="true"
             android:screenOrientation="portrait"/>
         <activity
+            android:name=".Controller.SettingActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"/>
+        <activity
             android:name=".Controller.RegistrarUsuarioActivity"
             android:exported="true"
             android:screenOrientation="portrait"/>

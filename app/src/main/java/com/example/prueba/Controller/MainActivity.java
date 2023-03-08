@@ -1,11 +1,16 @@
 package com.example.prueba.Controller;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.preference.PreferenceManager;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -14,12 +19,18 @@ import android.widget.Toast;
 import com.dd.CircularProgressButton;
 import com.example.prueba.IO.DBAccess;
 import com.example.prueba.R;
+import com.example.prueba.utils.Preferences;
 
 public class MainActivity extends AppCompatActivity {
+    private ConstraintLayout constraintLayout;
+
     private EditText nombreUsuario;
     private EditText password;
+
     private DBAccess mDB;
+
     private CheckBox saveUser;
+
     private CircularProgressButton circularIniciarSesion;
     private CircularProgressButton circularRegistrarse;
 
@@ -32,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        constraintLayout = (ConstraintLayout) findViewById(R.id.constraint_layout_main);
 
         nombreUsuario = (EditText) findViewById(R.id.txtUserInicioSesion);
         password = (EditText)findViewById(R.id.txtPasswordInicioSesion);
@@ -61,6 +73,43 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        // Activamos el icono de "Volver"(flecha atrás)
+        /*ActionBar actionBar = getSupportActionBar();
+        if(actionBar != null){
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }*/
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        // Cargamos las preferencias
+        Preferences.loadPreferences(this, constraintLayout);
+    }
+
+    // Sobreescribimos el metodo onCreateOptionsMenu para crearnos un menu personalizada
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Usamos un inflater para construir la vista pasandole el menu por defecto como parámetro
+        // para colocarlo en la vista
+        getMenuInflater().inflate(R.menu.simple_menu, menu);
+
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.item_preferencias:
+                Intent i = new Intent(MainActivity.this, SettingActivity.class);
+                startActivity(i);
+                break;
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
     /**

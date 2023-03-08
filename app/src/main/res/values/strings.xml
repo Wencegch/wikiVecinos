@@ -3,5 +3,6 @@
     <string name="Complete">Iniciar sesión</string>
     <string name="Error">Iniciar sesión</string>
     <string name="Text">Iniciar sesión</string>
+    <string name="delete">Borrar</string>
     <string name="backgroundColor">Color de fondo</string>
 </resources>
